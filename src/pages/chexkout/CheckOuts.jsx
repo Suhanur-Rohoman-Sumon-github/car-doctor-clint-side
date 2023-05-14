@@ -4,14 +4,13 @@ import { AuthContext } from '../../provider/AuthProvider';
 
 const CheckOuts = () => {
     const data = useLoaderData()
-    console.log(data)
+
     const {user} = useContext(AuthContext)
-    
     const { _id, title, price,img } = data
     const handleBook =(event)=>{
         event.preventDefault()
         const form = event.target
-        const email = form.email.value
+        const name = form.name.value
         const date = form.date.value
         const title = form.title.value
         const price = form.price.value
@@ -20,7 +19,7 @@ const CheckOuts = () => {
             date,
             title,
             price,
-            imges
+            img 
         }
         fetch('http://localhost:5000/bookings',{
             method:'POST',
@@ -45,7 +44,7 @@ const CheckOuts = () => {
                                 <label className="label">
                                     <span className="label-text ">name</span>
                                 </label>
-                                <input type="email" name='email' value={user?.email} placeholder="name" className="input input-bordered w-full" />
+                                <input type="email" name='name' value={user?.email} placeholder="name" className="input input-bordered w-full" />
                             </div>
                             <div className="form-control  w-1/2">
                                 <label className="label">

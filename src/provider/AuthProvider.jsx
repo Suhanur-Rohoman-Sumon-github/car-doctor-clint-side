@@ -5,37 +5,43 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 export const AuthContext = createContext(app)
 const auth = getAuth(app);
 
-const AuthProvider = ({children}) => {
-    const [user,setUser] = useState({})
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState({})
+    const [loding, setLoading] = useState(true)
 
-    const handaleSinup = (email,password) =>{
-     return   createUserWithEmailAndPassword(auth,email,password)    
+    const handaleSinup = (email, password) => {
+        setLoading(true)
+        return createUserWithEmailAndPassword(auth, email, password)
     }
-    const handleLogins = (email,password)=>{
-        return signInWithEmailAndPassword (auth,email,password)
+    const handleLogins = (email, password) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password)
     }
-    const logOut = ()=>{
+    const logOut = () => {
+        setLoading(true)
         return signOut(auth)
     }
-    
-    const handleGoogleSinin = () =>{
+
+    const handleGoogleSinin = () => {
         const googleProvider = new googleProvider
-        return signInWithPopup(auth,googleProvider)
+        return signInWithPopup(auth, googleProvider)
     }
-    useEffect(()=>{
-    const unsubscribe =  onAuthStateChanged(auth, loggedUser=>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, loggedUser => {
             setUser(loggedUser)
+            setLoading(false)
         })
-        return ()=>{
+        return () => {
             unsubscribe()
         }
-    },[])
-    const authInfo ={
+    }, [])
+    const authInfo = {
         handaleSinup,
         handleLogins,
         user,
         logOut,
-        handleGoogleSinin
+        handleGoogleSinin,
+        loding
     }
     return (
         <AuthContext.Provider value={authInfo}>
