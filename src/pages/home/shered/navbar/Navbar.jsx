@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import logo from '../../../../assets/logo.svg'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../../provider/AuthProvider';
 
 const Navbar = () => {
+    const {user,logOut} = useContext(AuthContext)
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -33,7 +35,8 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                 <button className="btn btn-outline btn-error ml-4">appinment</button>
-                <Link to={'/login'}><button className="btn btn-outline btn-error ml-4">Login</button></Link>
+               { !user && <Link to={'/login'}><button className="btn btn-outline btn-error ml-4">Login</button></Link>}
+               {user && <button onClick={logOut} className="btn btn-outline btn-error ml-4">Logout</button>}
                 </div>
             </div>
         </div>

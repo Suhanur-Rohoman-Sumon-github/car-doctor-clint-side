@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Navbar from '../../home/shered/navbar/Navbar';
 import Footer from '../../home/shered/footer/Footer';
 import img from '../../../assets/images/login/login.svg'
 import { FaFacebookF ,FaGithubSquare,FaGoogle} from "react-icons/fa";
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../provider/AuthProvider';
 
 const Login = () => {
+    const {handleLogins,handleGoogleSinin} = useContext(AuthContext)
+    const navigat = useNavigate()
     const handleLogin = (event) =>{
         event.preventDefault()
         const form = event.target
         const email = form.email.value
         const password = form.password.value
+        handleLogins(email,password)
+        .then(result=>{
+            console.log(result.user)
+            navigat('/')
+        })
+        .catch(error=>console.error(error))
+    }
+    const handleGogleLogin = () =>{
+        handleGoogleSinin()
+        .then(result=>{
+            console.log(result.user)
+        })
+        .catch(error=>console.error(error))
     }
     return (
         <div>
@@ -41,11 +58,12 @@ const Login = () => {
                             </div>
                         </form>
                        <div className='text-center'>
+                        <h1>do not have an account please <Link to={'/sinup'}><button className="btn btn-link text-[#FF3811]">sinup</button></Link></h1>
                        <h1>or sin in with</h1>
                         <div className='flex items-center ml-36 p-4'>
                         <button className=''><FaFacebookF /></button>
                         <button className='ml-4'><FaGithubSquare /></button>
-                        <button className='ml-4'><FaGoogle /></button>
+                        <button onClick={handleGogleLogin} className='ml-4'><FaGoogle /></button>
                         </div>
                        </div>
                     </div>
