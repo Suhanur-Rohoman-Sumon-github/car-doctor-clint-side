@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import Navbar from '../../home/shered/navbar/Navbar';
-import Footer from '../../home/shered/footer/Footer';
 import img from '../../../assets/images/login/login.svg'
 import { FaFacebookF ,FaGithubSquare,FaGoogle} from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
@@ -30,7 +28,6 @@ const Login = () => {
     }
     return (
         <div>
-            <Navbar />
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -72,7 +69,6 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };

@@ -17,8 +17,9 @@ const AuthProvider = ({children}) => {
     const logOut = ()=>{
         return signOut(auth)
     }
-    const googleProvider = new googleProvider
+    
     const handleGoogleSinin = () =>{
+        const googleProvider = new googleProvider
         return signInWithPopup(auth,googleProvider)
     }
     useEffect(()=>{

@@ -4,11 +4,11 @@ import img from '../../../assets/images/about_us/parts.jpg'
 
 const AboutUs = () => {
     return (
-        <div className="hero min-h-screen   bg-gray-300">
+        <div className="hero min-h-screen  bg-gray-300">
             <div className="hero-content flex-col lg:flex-row">
                 <div className='lg:w-1/2 relative'>
-                    <img src={img1} className="max-w-sm rounded-lg shadow-2xl" />
-                    <img src={img} className="max-w-sm rounded-lg shadow-2xl border  border-gray-700 border-spacing-20 absolute lg:top-32 lg:left-52" />
+                    <img src={img1} className="w-64 md:w-80 rounded-lg shadow-2xl" />
+                    <img src={img} className=" w-64 md:w-80 rounded-lg shadow-2xl border  border-gray-700 border-spacing-20 absolute  top-20 left-11 md:left-52" />
                 </div>
                 <div className='lg:w-1/2 mt-64 lg:mt-0'>
                     <h1 className='text-orange-500 text-2xl py-4'>About Us</h1>
