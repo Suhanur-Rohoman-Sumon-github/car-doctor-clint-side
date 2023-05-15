@@ -8,7 +8,12 @@ const Mybookings = () => {
     const url = `http://localhost:5000/bookings?email=${user?.email}`
     console.log(url)
     useEffect(() => {
-        fetch(url)
+        fetch(url,{
+            method:'GET',
+            headers:{
+                authoriztion:`Bearer ${localStorage.getItem('car-access-token')}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -33,12 +38,12 @@ const Mybookings = () => {
             headers:{
                 'content-type':'application/json'
             },
-            body:JSON.stringify({status:confirm})
+            body:JSON.stringify({status:'confirm'})
         })
         .then(res=>res.json())
         .then(data=>{
             console.log(data.modifiedCount)
-            if(data.modifiedCount>0 || data.modifiedCount===0 ){
+            if(data.modifiedCount>0 ){
                 const remaing = bookings.filter(booking=>booking._id !== id)
                 const updated = bookings.find (booking=>booking._id===id)
                 updated.status='confirm'

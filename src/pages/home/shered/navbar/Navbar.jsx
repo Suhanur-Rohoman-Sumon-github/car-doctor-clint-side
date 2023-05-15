@@ -5,6 +5,13 @@ import { AuthContext } from '../../../../provider/AuthProvider';
 
 const Navbar = () => {
     const {user,logOut} = useContext(AuthContext)
+    const handleLogut =()=>{
+        logOut()
+        .then(
+            localStorage.removeItem('car-access-token')
+        )
+        .catch(error=>console.error(error))
+    }
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -36,7 +43,7 @@ const Navbar = () => {
                 <div className="navbar-end">
                 <button className="btn btn-outline btn-error ml-4">appinment</button>
                { !user && <Link to={'/login'}><button className="btn btn-outline btn-error ml-4">Login</button></Link>}
-               {user && <button onClick={logOut} className="btn btn-outline btn-error ml-4">Logout</button>}
+               {user && <button onClick={handleLogut} className="btn btn-outline btn-error ml-4">Logout</button>}
                 </div>
             </div>
         </div>
